@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Display from "./Display.tsx";
 import Button from "./Button.tsx";
+import * as math from "mathjs";
 
 // Main Calculator component containing the logic
 const Calculator: React.FC = () => {
@@ -14,8 +15,9 @@ const Calculator: React.FC = () => {
     if (value === "=") {
       // If the "=" button is clicked, evaluate the operation
       try {
-        setResult(eval(operation).toString()); // Evaluate the operation and set the result
-        setOperation(""); // Clear the operation
+        const expression = operation.replace(/(\d+(\.\d+)?)%/g, "($1/100)"); // Replace % with /100 for math.js evaluation
+        const result = math.evaluate(expression); // Use math.js to evaluate the operation
+        setResult(result.toString()); // Set the result
       } catch (error) {
         setResult("Error"); // Display an error if the operation is invalid
       }
@@ -26,17 +28,6 @@ const Calculator: React.FC = () => {
     } else if (value === "←") {
       // If the "←" button is clicked, remove the last character from the operation
       setOperation(operation.slice(0, -1));
-    } else if (value === "%") {
-      // If the "%" button is clicked, calculate the percentage of the last number
-      try {
-        const lastNumber = operation.match(/\d+\.?\d*$/); // Find the last number in the operation
-        if (lastNumber) {
-          const percent = eval(lastNumber[0]) / 100; // Calculate the percentage
-          setOperation(operation + percent.toString()); // Append the percentage to the operation
-        }
-      } catch (error) {
-        setResult("Error"); // Display an error if the operation is invalid
-      }
     } else {
       // For all other buttons, append the value to the operation
       setOperation(operation + value);
