@@ -56,7 +56,7 @@ const Calculator: React.FC = () => {
           const expression = newOperation.replace(/(\d+(\.\d+)?)%/g, "($1/100)"); // Replace % with /100 for math.js evaluation
           const result = math.evaluate(expression); // Use math.js to evaluate the operation
           setResult(result.toString()); // Set the result
-          console.log(result);
+        
         } catch (error) {
           setResult("Error"); // Display an error if the operation is invalid
         }
