@@ -43,6 +43,8 @@ const Calculator: React.FC = () => {
         } catch (error) {
           setResult("Error"); // Display an error if the operation is invalid
         }
+      } else {
+        setResult("Error"); // Display an error if the operation is invalid
       }
     } else {
       // Append the value to the operation
