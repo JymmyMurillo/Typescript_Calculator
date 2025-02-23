@@ -7,7 +7,7 @@ import * as math from "mathjs";
 const Calculator: React.FC = () => {
   // Array of buttons to render in the calculator
   const buttons = [
-    "C",
+    "AC",
     "←",
     "%",
     "/",
@@ -45,7 +45,7 @@ const Calculator: React.FC = () => {
       } catch (error) {
         setResult("Error"); // Display an error if the operation is invalid
       }
-    } else if (value === "C") {
+    } else if (value === "AC") {
       // If the "C" button is clicked, clear the operation and result
       setOperation("");
       setResult("");
