@@ -5,7 +5,30 @@ import * as math from "mathjs";
 
 // Main Calculator component containing the logic
 const Calculator: React.FC = () => {
-  // State to store the current operation
+  // Array of buttons to render in the calculator
+  const buttons = [
+    "AC",
+    "←",
+    "%",
+    "/",
+    "7",
+    "8",
+    "9",
+    "*",
+    "4",
+    "5",
+    "6",
+    "-",
+    "1",
+    "2",
+    "3",
+    "+",
+    "00",
+    "0",
+    ".",
+    "=",
+  ];
+// State to store the current operation
   const [operation, setOperation] = useState("");
   // State to store the result of the operation
   const [result, setResult] = useState("");
@@ -22,7 +45,7 @@ const Calculator: React.FC = () => {
       } catch (error) {
         setResult("Error"); // Display an error if the operation is invalid
       }
-    } else if (value === "C") {
+    } else if (value === "AC") {
       // If the "C" button is clicked, clear the operation and result
       setOperation("");
       setResult("");
@@ -70,36 +93,7 @@ const Calculator: React.FC = () => {
       <Display operation={operation} result={result} />
       <div className="buttons">
         {/* Render buttons for numbers and operations */}
-        {["7", "8", "9", "/"].map((label) => (
-          <Button
-            key={label}
-            label={label}
-            onClick={() => handleButtonClick(label)}
-          />
-        ))}
-        {["4", "5", "6", "*"].map((label) => (
-          <Button
-            key={label}
-            label={label}
-            onClick={() => handleButtonClick(label)}
-          />
-        ))}
-        {["1", "2", "3", "-"].map((label) => (
-          <Button
-            key={label}
-            label={label}
-            onClick={() => handleButtonClick(label)}
-          />
-        ))}
-        {["0", ".", "=", "+"].map((label) => (
-          <Button
-            key={label}
-            label={label}
-            onClick={() => handleButtonClick(label)}
-          />
-        ))}
-        {/* Render buttons for clear, backspace, and percentage */}
-        {["C", "←", "%"].map((label) => (
+        {buttons.map((label) => (
           <Button
             key={label}
             label={label}
